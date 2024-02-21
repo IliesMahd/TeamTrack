@@ -1,0 +1,53 @@
+$white: #ffffff;
+$black: #000000;
+$lightBlue: #DCE9FF;
+$darkBlue: #1A73E8;
+$grayText: #878787;
+$lines: #E7E9EC;
+$whiteBackground: #F9F9FC;
+$radius: 8px;
+
+* {
+    min-width: 0;
+    font: inherit;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: inherit;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+video,
+svg {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    // min-height: 100dvh;
+    // overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+}

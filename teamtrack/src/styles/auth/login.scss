@@ -1,0 +1,62 @@
+@import "../variables";
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+        font-weight: bold;
+        color: $black;
+    }
+
+    form {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        row-gap: 1.5rem;
+        margin-top: 5rem;
+        
+        .wrapper-input {
+            position: relative;
+
+            label {
+                padding: .2rem 1rem .2rem 1rem;
+                background: $white;
+                position: absolute;
+                font-size: 1rem;
+                color: $black;
+                top: -1rem;
+                left: 1rem;
+            }
+            
+            input {
+                border: 1px solid $black;
+                width: 20vw;
+                padding: 1rem;
+                border-radius: $radius;
+            }
+
+        }
+
+        .wrapper-actions {
+            display: flex;
+            flex-direction: column;
+            button {
+                    background: $darkBlue;
+                    color: $white;
+                    padding: 1rem;
+                    border-radius: $radius;
+                    cursor: pointer;
+                }
+            
+                .no-account {
+                    color: $grayText;
+                    font-size: .8rem;
+                    text-align: center;
+                    cursor: pointer;
+                }
+        }
+    }
+}
