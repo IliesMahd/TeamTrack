@@ -43,20 +43,27 @@
         .wrapper-actions {
             display: flex;
             flex-direction: column;
+
             button {
                     background: $darkBlue;
                     color: $white;
                     padding: 1rem;
                     border-radius: $radius;
                     cursor: pointer;
-                }
+            }
             
-                .no-account {
-                    color: $grayText;
-                    font-size: .8rem;
-                    text-align: center;
-                    cursor: pointer;
-                }
+            .no-account {
+                color: $grayText;
+                font-size: .8rem;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .error {
+                color: red;
+                font-size: .8rem;
+                text-align: center;
+            }
         }
     }
 }
