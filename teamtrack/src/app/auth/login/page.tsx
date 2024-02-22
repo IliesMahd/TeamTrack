@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import "../../../styles/auth/login.scss";
 import { useEffect, useState } from "react";
+import "../../../styles/auth/form.scss";
 import { signIn, useSession } from "next-auth/react";
 
 const Login = ({ onRegisterClick }: any) => {
@@ -39,8 +39,6 @@ const Login = ({ onRegisterClick }: any) => {
       return;
     }
 
-    // setErrors({ email: '', password: '' });
-
     const res = await signIn("credentials", {
       redirect: false,
       email,
@@ -48,11 +46,9 @@ const Login = ({ onRegisterClick }: any) => {
     });
 
     if (res?.error) {
-      console.error(res.error);
       setErrors({ ...errors, email: res.error });
     } else {
-      // router.push("/dashboard");
-      console.log("good, redirect to dashboard");
+      router.push("/dashboard");
     }
   };
   return (
@@ -69,14 +65,10 @@ const Login = ({ onRegisterClick }: any) => {
         </div>
         <div className="wrapper-actions">
           <button>Se connecter</button>
-          <p
-            className="error"
-            style={{
-              display: errors.email || errors.password ? "block" : "none",
-            }}
-          >
-            {errors.email}
-          </p>
+          {/* <p className="error">{errors.email}</p>
+          <p className="error">{errors.password}</p> */}
+          {errors.email && <p className="error">{errors.email}</p>}
+          {errors.password && <p className="error">{errors.password}</p>}
           <p className="no-account" onClick={onRegisterClick}>
             Pas encore de compte ? Inscrivez-vous
           </p>

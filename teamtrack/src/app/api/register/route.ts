@@ -15,23 +15,20 @@ export const POST = async (request: any) => {
   try {
     await connect();
 
-    const { email, password } = await request.json();
+    const { email, username, password } = await request.json();
 
-    // Validation des champs
-    if (!email || !password || !validator.isEmail(email)) {
-      return NextResponse.json('Email ou mot de passe invalide', { status: HTTP_STATUS.BAD_REQUEST });
+    if (!email || !username || !password || !validator.isEmail(email)) {
+      return NextResponse.json('Email, nom d\'utilisateur ou mot de passe invalide', { status: HTTP_STATUS.BAD_REQUEST });
     }
 
-    // Vérification si l'utilisateur existe déjà
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
 
     if (existingUser) {
       return NextResponse.json('Cet utilisateur existe déjà', { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
     }
 
-    // Création de l'utilisateur
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hashedPassword });
+    const user = await User.create({ email, username, password: hashedPassword });
     await user.save();
 
     return NextResponse.json('Utilisateur créé avec succès', { status: HTTP_STATUS.CREATED });

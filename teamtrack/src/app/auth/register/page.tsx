@@ -1,11 +1,12 @@
 import { useState } from "react";
-import "../../../styles/auth/register.scss";
+import "../../../styles/auth/form.scss";
 import { useRouter } from "next/navigation";
 
 const Register = ({ onRegisterClick }: any) => {
   const [errors, setErrors] = useState({
     email: "",
     password: "",
+    username: "",
     confirmPassword: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
@@ -19,12 +20,22 @@ const Register = ({ onRegisterClick }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const email = e.target[0].value;
-    const password = e.target[1].value;
-    const confirmPassword = e.target[2].value;
-    let newErrors = { email: "", password: "", confirmPassword: "" };
+    const username = e.target[1].value;
+    const password = e.target[2].value;
+    const confirmPassword = e.target[3].value;
+    let newErrors = {
+      email: "",
+      password: "",
+      username: "",
+      confirmPassword: "",
+    };
 
     if (!isValidEmail(email)) {
       newErrors.email = "Adresse e-mail invalide";
+    }
+
+    if (!username.trim()) {
+      newErrors.username = "Nom d'utilisateur requis";
     }
 
     if (!password || password.length < 6) {
@@ -36,18 +47,23 @@ const Register = ({ onRegisterClick }: any) => {
       newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
     }
 
-    if (newErrors.email || newErrors.password || newErrors.confirmPassword) {
+    if (
+      newErrors.email ||
+      newErrors.password ||
+      newErrors.username ||
+      newErrors.confirmPassword
+    ) {
       setErrors(newErrors);
       return;
     }
 
-    setErrors({ email: "", password: "", confirmPassword: "" });
+    setErrors({ email: "", password: "", username: "", confirmPassword: "" });
 
     try {
       const response = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, username, password }),
       });
 
       if (!response.ok) {
@@ -55,11 +71,11 @@ const Register = ({ onRegisterClick }: any) => {
       }
 
       setSuccessMessage("Compte créé avec succès");
-
-      const data = await response.json();
-      console.log(data);
+      setTimeout(() => {
+        setSuccessMessage("");
+        onRegisterClick();
+      }, 2000);
     } catch (error: any) {
-      console.error(error);
       setErrors({ ...errors, email: error.message });
     }
   };
@@ -71,21 +87,28 @@ const Register = ({ onRegisterClick }: any) => {
         <div className="wrapper-input">
           <label htmlFor="email">Adresse email</label>
           <input type="text" name="email" />
-          <p className="error">{errors.email}</p>
+        </div>
+        <div className="wrapper-input">
+          <label htmlFor="username">Nom d'utilisateur</label>
+          <input type="text" name="username" />
         </div>
         <div className="wrapper-input">
           <label htmlFor="password">Mot de passe</label>
           <input type="password" name="password" />
-          <p className="error">{errors.password}</p>
         </div>
         <div className="wrapper-input">
           <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
           <input type="password" name="confirmPassword" />
-          <p className="error">{errors.confirmPassword}</p>
         </div>
         <div className="wrapper-actions">
           <button>S'inscrire</button>
-          <p className="success">{successMessage}</p>
+          {errors.email && <p className="error">{errors.email}</p>}
+          {errors.password && <p className="error">{errors.password}</p>}
+          {errors.confirmPassword && (
+            <p className="error">{errors.confirmPassword}</p>
+          )}
+          {errors.username && <p className="error">{errors.username}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
           <p className="no-account" onClick={onRegisterClick}>
             Vous avez déjà un compte ? Connectez-vous
           </p>
