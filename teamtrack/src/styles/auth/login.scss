@@ -58,12 +58,18 @@
                 text-align: center;
                 cursor: pointer;
             }
-
-            .error {
-                color: red;
-                font-size: .8rem;
-                text-align: center;
-            }
         }
+    }
+
+    .error {
+        color: red;
+        font-size: .8rem;
+        text-align: center;
+    }
+
+    .success {
+        color: green;
+        font-size: .8rem;
+        text-align: center;
     }
 }

@@ -3,7 +3,12 @@ import "../../../styles/auth/register.scss";
 import { useRouter } from "next/navigation";
 
 const Register = ({ onRegisterClick }: any) => {
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
   const isValidEmail = (email: any) => {
@@ -15,7 +20,8 @@ const Register = ({ onRegisterClick }: any) => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-    let newErrors = { email: "", password: "" };
+    const confirmPassword = e.target[2].value;
+    let newErrors = { email: "", password: "", confirmPassword: "" };
 
     if (!isValidEmail(email)) {
       newErrors.email = "Adresse e-mail invalide";
@@ -26,12 +32,16 @@ const Register = ({ onRegisterClick }: any) => {
         "Le mot de passe doit contenir au moins 6 caractères";
     }
 
-    if (newErrors.email || newErrors.password) {
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
+    }
+
+    if (newErrors.email || newErrors.password || newErrors.confirmPassword) {
       setErrors(newErrors);
       return;
     }
 
-    setErrors({ email: "", password: "" });
+    setErrors({ email: "", password: "", confirmPassword: "" });
 
     try {
       const response = await fetch("/api/register", {
@@ -40,23 +50,20 @@ const Register = ({ onRegisterClick }: any) => {
         body: JSON.stringify({ email, password }),
       });
 
-      console.log("====================================");
-      console.log(response);
-      console.log("====================================");
-
       if (!response.ok) {
         throw Error("Le compte existe déjà");
       }
 
+      setSuccessMessage("Compte créé avec succès");
+
       const data = await response.json();
-      console.log("====================================");
       console.log(data);
-      console.log("====================================");
     } catch (error: any) {
       console.error(error);
       setErrors({ ...errors, email: error.message });
     }
   };
+
   return (
     <div className="container">
       <h1>Inscrivez-vous</h1>
@@ -64,25 +71,21 @@ const Register = ({ onRegisterClick }: any) => {
         <div className="wrapper-input">
           <label htmlFor="email">Adresse email</label>
           <input type="text" name="email" />
+          <p className="error">{errors.email}</p>
         </div>
         <div className="wrapper-input">
           <label htmlFor="password">Mot de passe</label>
           <input type="password" name="password" />
+          <p className="error">{errors.password}</p>
         </div>
         <div className="wrapper-input">
-          <label htmlFor="password">Confirmez le mot de passe</label>
-          <input type="password" name="password" />
+          <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
+          <input type="password" name="confirmPassword" />
+          <p className="error">{errors.confirmPassword}</p>
         </div>
         <div className="wrapper-actions">
           <button>S'inscrire</button>
-          <p
-            className="error"
-            style={{
-              display: errors.email || errors.password ? "block" : "none",
-            }}
-          >
-            {errors.email}
-          </p>
+          <p className="success">{successMessage}</p>
           <p className="no-account" onClick={onRegisterClick}>
             Vous avez déjà un compte ? Connectez-vous
           </p>

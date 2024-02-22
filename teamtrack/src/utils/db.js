@@ -10,8 +10,8 @@ const connect = async () => {
     });
     console.log('Connected to database');
   } catch (error) {
-    console.error('Error while connecting to database:', error);
-    throw new Error('Error while connecting to database');
+    console.error('Error while connecting to database 1:', error);
+    throw new Error('Error while connecting to database 2');
   }
 };
 
