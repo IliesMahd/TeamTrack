@@ -83,55 +83,85 @@ const Register = ({ onRegisterClick }: any) => {
 
   return (
     <motion.div
-    className="container"
-    initial={{
-      opacity: 0,
-      x: 50,
-    }}
-    animate={{
-      opacity: 1,
-      x: 0,
-    }}
-    transition={{
-      duration: 1,
-    }}
-    viewport={{ once: true }}
-  >
-    <div className="container">
-      <h1>Inscrivez-vous</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="wrapper-input">
-          <label htmlFor="email">Adresse email</label>
-          <input type="text" name="email" />
-        </div>
-        <div className="wrapper-input">
-          <label htmlFor="username">Nom d'utilisateur</label>
-          <input type="text" name="username" />
-        </div>
-        <div className="wrapper-input">
-          <label htmlFor="password">Mot de passe</label>
-          <input type="password" name="password" />
-        </div>
-        <div className="wrapper-input">
-          <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
-          <input type="password" name="confirmPassword" />
-        </div>
-        <div className="wrapper-actions">
-          <button>S'inscrire</button>
-          {errors.email && <p className="error">{errors.email}</p>}
-          {errors.password && <p className="error">{errors.password}</p>}
-          {errors.confirmPassword && (
-            <p className="error">{errors.confirmPassword}</p>
-          )}
-          {errors.username && <p className="error">{errors.username}</p>}
-          {successMessage && <p className="success">{successMessage}</p>}
-          <p className="no-account" onClick={onRegisterClick}>
-            Vous avez déjà un compte ? Connectez-vous
-          </p>
-        </div>
-      </form>
-    </div>
-  </motion.div>
+      className="container"
+      initial={{
+        opacity: 0,
+        x: 50,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      transition={{
+        duration: 1,
+      }}
+      viewport={{ once: true }}
+    >
+      <div className="container">
+        <h1>Inscrivez-vous</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="wrapper-input">
+            <label htmlFor="email">Adresse email</label>
+            <input type="text" name="email" />
+          </div>
+          <div className="wrapper-input">
+            <label htmlFor="username">Nom d'utilisateur</label>
+            <input type="text" name="username" />
+          </div>
+          <div className="wrapper-input">
+            <label htmlFor="password">Mot de passe</label>
+            <input type="password" name="password" />
+          </div>
+          <div className="wrapper-input">
+            <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
+            <input type="password" name="confirmPassword" />
+          </div>
+          <div className="wrapper-actions">
+            <button>S'inscrire</button>
+            {errors.email && (
+              <motion.p
+                className="error"
+                initial={{ x: 50 }}
+                animate={{ x: 0 }}
+              >
+                {errors.email}
+              </motion.p>
+            )}
+            {errors.password && (
+              <motion.p
+                className="error"
+                initial={{ x: 50 }}
+                animate={{ x: 0 }}
+              >
+                {errors.password}
+              </motion.p>
+            )}
+            {errors.confirmPassword && (
+              <motion.p
+                className="error"
+                initial={{ x: 50 }}
+                animate={{ x: 0 }}
+              >
+                {errors.confirmPassword}
+              </motion.p>
+            )}
+            {errors.username && (
+              <motion.p
+                className="error"
+                initial={{ x: 50 }}
+                animate={{ x: 0 }}
+              >
+                {errors.username}
+              </motion.p>
+            )}
+            {successMessage && <p className="success">{successMessage}</p>}
+            <p className="no-account" onClick={onRegisterClick}>
+              Vous avez déjà un compte ? Connectez-vous
+            </p>
+          </div>
+        </form>
+      </div>
+    </motion.div>
   );
 };
 

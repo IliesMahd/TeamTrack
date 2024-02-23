@@ -31,7 +31,7 @@ interface User {
 
 const NavBar = () => {
   library.add(fas);
-  console.log(library);
+  // console.log(library);
   const [currentNav, setCurrentNav] = useState("overview");
   const [projectIsOpen, setProjectIsOpen] = useState(false);
   const avatar = useMemo(() => {
