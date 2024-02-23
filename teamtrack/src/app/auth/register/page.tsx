@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../../styles/auth/form.scss";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 const Register = ({ onRegisterClick }: any) => {
   const [errors, setErrors] = useState({
@@ -81,6 +82,21 @@ const Register = ({ onRegisterClick }: any) => {
   };
 
   return (
+    <motion.div
+    className="container"
+    initial={{
+      opacity: 0,
+      x: 50,
+    }}
+    animate={{
+      opacity: 1,
+      x: 0,
+    }}
+    transition={{
+      duration: 1,
+    }}
+    viewport={{ once: true }}
+  >
     <div className="container">
       <h1>Inscrivez-vous</h1>
       <form onSubmit={handleSubmit}>
@@ -115,6 +131,7 @@ const Register = ({ onRegisterClick }: any) => {
         </div>
       </form>
     </div>
+  </motion.div>
   );
 };
 

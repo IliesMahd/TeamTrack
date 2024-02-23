@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import "../../../styles/auth/form.scss";
 import { signIn, useSession } from "next-auth/react";
+import { motion } from "framer-motion";
 
 const Login = ({ onRegisterClick }: any) => {
   const router = useRouter();
@@ -52,7 +53,22 @@ const Login = ({ onRegisterClick }: any) => {
     }
   };
   return (
-    <div className="container">
+    <motion.div 
+    className="container"
+    initial={{
+      opacity: 0,
+      x: 50,
+    }}
+    animate={{
+      opacity: 1,
+      x: 0,
+    }}
+    transition={{
+      duration: 1,
+    }}
+    viewport={{ once: true }}
+    >
+          <div className="container">
       <h1>Connectez-vous</h1>
       <form method="POST" onSubmit={handleSubmit}>
         <div className="wrapper-input">
@@ -75,6 +91,7 @@ const Login = ({ onRegisterClick }: any) => {
         </div>
       </form>
     </div>
+    </motion.div>
   );
 };
 
