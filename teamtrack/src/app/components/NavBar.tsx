@@ -1,10 +1,17 @@
-import { useMemo } from "react";
+"use client";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import "../../styles/components/navbar.scss";
-import { RxDashboard } from "react-icons/rx";
-import { FaFolder } from "react-icons/fa";
+import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineFolder } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
+import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowRight } from "react-icons/md";
 import { createAvatar } from "@dicebear/core";
 import { botttsNeutral } from "@dicebear/collection";
+import { MdFolder } from "react-icons/md";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 interface Projects {
   id: number;
@@ -23,6 +30,10 @@ interface User {
 }
 
 const NavBar = () => {
+  library.add(fas);
+  console.log(library);
+  const [currentNav, setCurrentNav] = useState("overview");
+  const [projectIsOpen, setProjectIsOpen] = useState(false);
   const avatar = useMemo(() => {
     return createAvatar(botttsNeutral, {
       size: 48,
@@ -39,16 +50,16 @@ const NavBar = () => {
     projects: [
       {
         id: 1,
-        name: "Projet 1",
+        name: "Interface UI/UX - Banque de France",
         description: "Description du projet 1",
-        color: "red",
+        color: "#9B5DE5",
         team: ["John Doe", "Jane Doe"],
       },
       {
         id: 2,
-        name: "Projet 2",
+        name: "Application mobile - Banque de France",
         description: "Description du projet 2",
-        color: "blue",
+        color: "#F77F00",
         team: ["John Doe", "Jane Doe"],
       },
     ],
@@ -66,41 +77,74 @@ const NavBar = () => {
           )}
         </div>
       </div>
-      <ul>
+      <ul className="first-level">
+        <p className="category-title">Menu</p>
         <li>
-          <p>Menu</p>
-          <Link href="/" className="link">
-            <RxDashboard className="icon"/>
-            Tableau de bord
-          </Link>
-          <Link href="/" className="link">
-            <FaFolder className="icon"/>
-            Projets
+          <Link
+            href="##"
+            className={`link ${currentNav === "overview" ? "active" : ""}`}
+            onClick={() => {
+              setCurrentNav("overview");
+              setProjectIsOpen(false);
+            }}
+          >
+            <MdOutlineDashboard className="icon" size={24} />
+            <p>Tableau de bord</p>
           </Link>
         </li>
         <li>
-          <p>Equipes</p>
-        </li>
-        <li>
-          <p>Général</p>
+          <Link
+            href="##"
+            className={`link ${currentNav === "projet" ? "active" : ""}`}
+            onClick={() => setCurrentNav("projet")}
+          >
+            <MdOutlineFolder className="icon" size={24} />
+            <div className="wrapper-projects-link">
+              <p>Projets</p>
+              {projectIsOpen ? (
+                <MdArrowDropDown
+                  className="icon"
+                  size={24}
+                  onClick={() => setProjectIsOpen(false)}
+                />
+              ) : (
+                <MdArrowRight
+                  className="icon"
+                  size={24}
+                  onClick={() => setProjectIsOpen(true)}
+                />
+              )}
+            </div>
+          </Link>
+          {projectIsOpen ? (
+            <ul className="projects-list">
+              {user.projects.map((project) => (
+                <li key={project.id} className="projects">
+                  <MdFolder className="icon" size={24} fill={project.color} />
+                  <p>{project.name}</p>
+                  {/* <Link
+                    href="##"
+                    className="link"
+                    style={{ backgroundColor: project.color }}
+                  >
+                    <p>{project.name}</p>
+                  </Link> */}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </li>
       </ul>
-      {/* <ul>
+      <ul className="first-level">
         <li>
-          <p>Menu</p>
-          <Link href="/" className="link">
-            <RxDashboard />
-            Accueil
-          </Link>
-          <Link href="/" className="link">
-            Projets
-          </Link>
+          <p className="category-title">Equipes</p>
         </li>
+      </ul>
+      <ul className="first-level">
         <li>
-          <p>Equipes</p>
+          <p className="category-title">Général</p>
         </li>
-        <li>Général</li>
-      </ul> */}
+      </ul>
     </nav>
   );
 };

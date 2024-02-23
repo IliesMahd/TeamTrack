@@ -1,51 +1,95 @@
-@import "../variables";
+@import "../variables"; 
 
 nav {
-    background: pink;
+    background: $white;
     padding: 1rem;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
+    display: flex;
+    // max-width: fit-content;
 
     .user-informations {
-        display: flex;
         justify-content: space-evenly;
-        width: 100%;
+        display: grid;
+        grid-template-columns: 30% 70%;
+        align-items: center;
 
         .wrapper-texts {
-            background: orange;
+            margin: 0;
 
             h1 {
                 font-size: 1.2rem;
                 color: $black;
                 font-weight: bold;
+                margin: 0;
             }
 
             p {
                 font-size: .8rem;
                 color: $grayText;
                 width: 100%;
+                margin: 0;
             }
         }
     }
 
-    ul {
-        background: red;
+    .first-level {
+        // background: orange;
         height: 100%;
         padding: 0;
+        margin-top: 3rem;
+
+        .category-title {
+            color: $grayText;
+        }
 
         li {
+            // background: orange;
 
             .link {
                 display: flex;
-                background: yellowgreen;
-                margin-bottom: 1rem;
-                padding: 1rem;
+                margin-top: 1rem;
+                padding-left: 1rem;
+                font-size: clamp(.8rem, 1vw, 1rem);
+                border-radius: $radius;
 
                 .icon {
                     margin-right: 1rem;
                 }
+
             }
+
+            .wrapper-projects-link {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .active {
+                background: $lightBlue;
+            }
+        }
+
+        .projects-list {
+            padding-left: 2rem;
+
+            .projects {
+                    display: flex;
+                    width: 100%;
+                    padding: 0rem;
+                    margin-top: 1rem;
+
+                    p {
+                        margin: 0;
+                        font-size: .9rem;
+                    }
+            
+                    .icon {
+                        margin-right: 1rem;
+                        flex: 0 0 auto;
+                    }
+                }
         }
     }
 }
