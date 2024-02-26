@@ -1,7 +1,80 @@
 @import "variables";
 
 main {
-    width: 100vw;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+
+    .wrapper-mobile {
+        background: $darkBlue;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 4rem;
+        gap: 2rem;
+
+        h1 {
+            font-size: clamp(3.2rem, 8vw, 4rem);
+            font-weight: bold;
+            color: $white;
+        }
+
+/*        span {
+            padding: clamp(1rem, 2vw, 3rem);
+            aspect-ratio: 2;
+            --_g: no-repeat radial-gradient(circle closest-side, #fff 90%, #0000);
+            background:
+                var(--_g) 0% 50%,
+                var(--_g) 50% 50%,
+                var(--_g) 100% 50%;
+            background-size: calc(100%/3) 50%;
+            animation: l3 1s infinite linear;
+        }*/
+
+        .circle {
+            padding: 1.5rem;
+            border: 1px solid $white;
+            position: relative;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+
+
+            .text-around-circle {
+                position: absolute;
+                top: -50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: $white;
+                font-size: clamp(.8rem, 2vw, 2rem);
+            }
+
+            .icon {
+                font-size: clamp(1.5rem, 2vw, 3rem);
+                color: $white;
+            }
+        }
+
+        p {
+            color: $white;
+            font-size: clamp(1rem, 2vw, 2rem);
+        }
+
+        button {
+            background: $white;
+            color: $darkBlue;
+            padding: 1rem;
+            border: 1px solid $white;
+            font-size: clamp(1rem, 2vw, 2rem);
+            margin-bottom: 1rem;
+            border-radius: $radius;
+        }
+    }
+    /*width: 100vw;
     height: 100vh;
     // background: $darkBlue;
     display: grid;
@@ -31,7 +104,18 @@ main {
             background-size: calc(100%/3) 50%;
             animation: l3 1s infinite linear;
         }
-    }
+    }*/
+}
+
+// tablet
+
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+
+}
+
+// desktop
+
+@media screen and (min-width: 1025px) {
 }
 
 @keyframes l3 {

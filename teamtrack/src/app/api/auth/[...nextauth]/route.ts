@@ -6,6 +6,7 @@ import { connect } from '../../../../utils/db';
 import bcrypt from 'bcryptjs';
 
 export const authOptions: any = {
+  secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
       id: 'credentials',
