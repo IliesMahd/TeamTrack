@@ -1,5 +1,86 @@
 @import "../variables";
 
+.container {
+  background: $white;
+  border-radius: 2rem 2rem 0 0;
+  position: absolute;
+    width: 100%;
+    height: 70%;
+  align-self: flex-end;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 3rem;
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-weight: bold;
+    color: $black;
+  }
+
+  form {
+
+    .wrapper-input {
+      display: flex;
+      margin-bottom: 1rem;
+
+      .icon {
+        color: $darkBlue;
+        margin-right: .5rem;
+        font-size: clamp(1.5rem, 2vw, 3rem);
+      }
+
+      input {
+        width: 100%;
+        padding: .8rem;
+        border-radius: $radius;
+
+        &::placeholder {
+          color: $grayText;
+        }
+      }
+    }
+
+    .wrapper-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+
+      button {
+        background: $darkBlue;
+        color: $white;
+        width: 100%;
+        padding: .8rem;
+        font-size: clamp(.8rem, 2vw, 1.5rem);
+        border-radius: $radius;
+      }
+
+      .no-account {
+        color: $grayText;
+        font-size: .8rem;
+        cursor: pointer;
+      }
+
+      .error {
+          color: red;
+          font-size: .8rem;
+          text-align: center;
+      }
+
+      .success {
+          color: green;
+          font-size: .8rem;
+          text-align: center;
+      }
+    }
+  }
+
+}
+
 /*
 .container {
     display: flex;

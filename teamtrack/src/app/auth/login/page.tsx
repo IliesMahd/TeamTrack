@@ -5,6 +5,8 @@ import "../../../styles/auth/form.scss";
 import { signIn, useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import LoadingScreen from "../../components/LoadingScreen";
+import { BsEnvelope } from "react-icons/bs";
+import { BsLock } from "react-icons/bs";
 
 const Login = ({ onRegisterClick }: any) => {
   const router = useRouter();
@@ -76,20 +78,58 @@ const Login = ({ onRegisterClick }: any) => {
   };
   return (
     <>
-      <motion.div
+      <div className="container">
+        <motion.h1
+          initial={{ x: -300 }}
+          animate={{ x: 0, speed: 2 }}
+        >
+            Connexion
+        </motion.h1>
+        <motion.form
+          method="POST"
+          onSubmit={handleSubmit}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+        >
+          <div className="wrapper-input">
+            <BsEnvelope className="icon"/>
+            <input type="text" name="email" placeholder="Email"/>
+          </div>
+          <div className="wrapper-input">
+            <BsLock className="icon"/>
+            <input type="password" name="password" placeholder="Mot de passe"/>
+          </div>
+          <div className="wrapper-actions">
+            <button>Se connecter</button>
+            {errors.email && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.email}
+                </motion.p>
+            )}
+            {errors.password && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.password}
+                </motion.p>
+            )}
+            <p className="no-account" onClick={onRegisterClick}>
+              Pas encore de compte ? Inscrivez-vous
+            </p>
+          </div>
+        </motion.form>
+        {/*        <form method="POST" onSubmit={handleSubmit}>
+
+        </form>*/}
+      </div>
+      {/*      <motion.div
         className="container"
-        initial={{
-          opacity: 0,
-          x: 50,
-        }}
-        animate={{
-          opacity: 1,
-          x: 0,
-        }}
-        transition={{
-          duration: 1,
-        }}
-        viewport={{ once: true }}
       >
         <div className="container">
           <h1>Connectez-vous</h1>
@@ -128,7 +168,7 @@ const Login = ({ onRegisterClick }: any) => {
             </div>
           </form>
         </div>
-      </motion.div>
+      </motion.div>*/}
       {loading && <LoadingScreen title="TeamTrack" />}
     </>
   );

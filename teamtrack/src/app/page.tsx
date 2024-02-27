@@ -25,53 +25,19 @@ export default function Home() {
         >
           {brandName}
         </motion.h1>
-        <motion.p
-            initial={{opacity: 0, y: 50}}
-            animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.5}}
-        >
-          Découverez la meilleure façon de gérer votre équipe
-        </motion.p>
-        <motion.button
-            className="btn-to-login"
-            initial={{opacity: 0, y: 50}}
-            animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.5}}
-        >
-          Connectez-vous
-        </motion.button>
-{/*        <motion.span
+        <motion.span
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{delay: 0.5}}
-        ></motion.span>*/}
-        <span className="circle">
-          <p className="text-around-circle">Scrollez</p>
-          <BsMouse className="icon"/>
-        </span>
+        ></motion.span>
       </div>
       {
         showLogin ? (
-            <Login onRegisterClick={handleRegisterClick} />
+            <Login onRegisterClick={handleRegisterClick}/>
         ) : (
-            <Register onRegisterClick={handleRegisterClick} />
+            <Register onRegisterClick={handleRegisterClick}/>
         )
       }
-      {/*      <div className="wrapper">
-        <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          {brandName}
-        </motion.h1>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        ></motion.span>
-      </div>
-      {showLogin ? (
-        <Login onRegisterClick={handleRegisterClick} />
-      ) : (
-        <Register onRegisterClick={handleRegisterClick} />
-      )}*/}
     </main>
   );
 }
