@@ -14,11 +14,30 @@ const Login = ({ onRegisterClick }: any) => {
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
 
-  // useEffect(() => {
-  //   if (session) {
-  //     router.push("/dashboard");
-  //   }
-  // }, [session, router]);
+  useEffect(() => {
+    router.prefetch("/dashboard");
+    console.log('router', router)
+
+/*    if (router.events) {
+      console.log('router.events', router.events)
+      const handleRouteChange = (url: any, { shallow }: any) => {
+        console.log(
+            `App is changing to ${url} ${
+                shallow ? 'with' : 'without'
+            } shallow routing`
+        );
+      };
+
+      router.events.on('routeChangeStart', handleRouteChange);
+
+      return () => {
+        router.events.off('routeChangeStart', handleRouteChange);
+      };
+    } else {
+        console.log('router.events is not available')
+    }*/
+  }, [router]);
+
 
   const isValidEmail = (email: any) => {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -61,15 +80,7 @@ const Login = ({ onRegisterClick }: any) => {
       if (res?.error) {
         setErrors({ email: res.error, password: "" });
       } else {
-        console.log("logged in", res);
-        setLoading(true);
-        const minLoadingTime = 2000;
-        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
-
-        setTimeout(() => {
-          setLoading(false);
-          router.push("/dashboard");
-        }, remainingTime);
+        router.push("/dashboard");
       }
     } catch (error: any) {
       console.error("An unexpected error happened:", error);
@@ -100,7 +111,15 @@ const Login = ({ onRegisterClick }: any) => {
             <input type="password" name="password" placeholder="Mot de passe"/>
           </div>
           <div className="wrapper-actions">
-            <button>Se connecter</button>
+            <button>
+              {loading ? (
+                  <>
+                    Connexion... <span></span>
+                  </>
+              ) : (
+                  "Se connecter"
+              )}
+            </button>
             {errors.email && (
                 <motion.p
                     className="error"
@@ -124,52 +143,7 @@ const Login = ({ onRegisterClick }: any) => {
             </p>
           </div>
         </motion.form>
-        {/*        <form method="POST" onSubmit={handleSubmit}>
-
-        </form>*/}
       </div>
-      {/*      <motion.div
-        className="container"
-      >
-        <div className="container">
-          <h1>Connectez-vous</h1>
-          <form method="POST" onSubmit={handleSubmit}>
-            <div className="wrapper-input">
-              <label htmlFor="email">Adresse email</label>
-              <input type="text" name="email" />
-            </div>
-            <div className="wrapper-input">
-              <label htmlFor="password">Mot de passe</label>
-              <input type="password" name="password" />
-            </div>
-            <div className="wrapper-actions">
-              <button>Se connecter</button>
-              {errors.email && (
-                <motion.p
-                  className="error"
-                  initial={{ x: 50 }}
-                  animate={{ x: 0 }}
-                >
-                  {errors.email}
-                </motion.p>
-              )}
-              {errors.password && (
-                <motion.p
-                  className="error"
-                  initial={{ x: 50 }}
-                  animate={{ x: 0 }}
-                >
-                  {errors.password}
-                </motion.p>
-              )}
-              <p className="no-account" onClick={onRegisterClick}>
-                Pas encore de compte ? Inscrivez-vous
-              </p>
-            </div>
-          </form>
-        </div>
-      </motion.div>*/}
-      {loading && <LoadingScreen title="TeamTrack" />}
     </>
   );
 };

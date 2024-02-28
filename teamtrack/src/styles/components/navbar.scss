@@ -1,6 +1,67 @@
 @import "../variables"; 
 
 nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: .5rem;
+
+    .pages_link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        gap: 2rem;
+
+        li {
+            .link {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                p {
+                    font-size: clamp(.8rem, 1vw, 1rem);
+                    color: $black;
+                }
+
+                .icon {
+                    font-size: clamp(1.5rem, 2vw, 3rem);
+                    color: $black;
+                }
+
+                &.active {
+
+                    p {
+                        color: $darkBlue;
+                    }
+
+                    .icon {
+                        color: $darkBlue;
+                    }
+                }
+            }
+        }
+
+/*        li, .link {
+            padding: 0;
+            margin: 0;
+            background: yellowgreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            p {
+                font-size: clamp(.8rem, 1vw, 1rem);
+            }
+        }*/
+    }
+}
+
+/*
+nav {
     background: $white;
     padding: 1rem;
     flex-direction: column;
@@ -91,5 +152,12 @@ nav {
                     }
                 }
         }
+    }
+}*/
+
+// tablet & desktop
+@media screen and (min-width: 767px) {
+    nav {
+        position: relative;
     }
 }

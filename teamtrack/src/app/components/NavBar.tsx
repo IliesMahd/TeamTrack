@@ -9,9 +9,8 @@ import { MdArrowDropDown } from "react-icons/md";
 import { MdArrowRight } from "react-icons/md";
 import { createAvatar } from "@dicebear/core";
 import { botttsNeutral } from "@dicebear/collection";
-import { MdFolder } from "react-icons/md";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
+import { BsCalendar4Week } from "react-icons/bs";
+
 
 interface Projects {
   id: number;
@@ -30,8 +29,6 @@ interface User {
 }
 
 const NavBar = () => {
-  library.add(fas);
-  // console.log(library);
   const [currentNav, setCurrentNav] = useState("overview");
   const [projectIsOpen, setProjectIsOpen] = useState(false);
   const avatar = useMemo(() => {
@@ -66,7 +63,27 @@ const NavBar = () => {
   };
   return (
     <nav>
-      <div className="user-informations">
+      <ul className="pages_link">
+        <li>
+          <Link href="##" className={`link ${currentNav === "overview" ? "active" : ""}`} onClick={() => setCurrentNav("overview")}>
+            <MdOutlineDashboard className="icon" size={24} />
+            <p>Tableau de bord</p>
+          </Link>
+        </li>
+        <li>
+          <Link href="##" className={`link ${currentNav === "projects" ? "active" : ""}`} onClick={() => setCurrentNav("projects")}>
+            <MdOutlineFolder className="icon" size={24} />
+            <p>Projets</p>
+          </Link>
+        </li>
+        <li>
+          <Link href="##" className={`link ${currentNav === "calendar" ? "active" : ""}`} onClick={() => setCurrentNav("calendar")}>
+            <BsCalendar4Week className="icon" size={24} />
+            <p>Calendrier</p>
+          </Link>
+        </li>
+      </ul>
+{/*      <div className="user-informations">
         <img src={avatar} alt="avatar" />
         <div className="wrapper-texts">
           <h1>{user.username}</h1>
@@ -122,13 +139,13 @@ const NavBar = () => {
                 <li key={project.id} className="projects">
                   <MdFolder className="icon" size={24} fill={project.color} />
                   <p>{project.name}</p>
-                  {/* <Link
+                   <Link
                     href="##"
                     className="link"
                     style={{ backgroundColor: project.color }}
                   >
                     <p>{project.name}</p>
-                  </Link> */}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -144,7 +161,7 @@ const NavBar = () => {
         <li>
           <p className="category-title">Général</p>
         </li>
-      </ul>
+      </ul>*/}
     </nav>
   );
 };
