@@ -1,8 +1,11 @@
+"use client";
 import "../../styles/dashboard/dashboard.scss";
 import NavBar from "../components/NavBar";
 import SearchBar from "styles/app/components/SearchBar";
 import Avatar from "styles/app/components/Avatar";
 import Notifications from "styles/app/components/Notifications";
+import {useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 interface Projects {
     id: number;
@@ -27,7 +30,16 @@ interface User {
     avatar: Avatar[];
 }
 
-const layout = ({children}: any) => {
+const Layout = ({children}: any) => {
+    const router = useRouter();
+
+    useEffect(() => {
+        const pagesPath: string[] = ["/home", "/projects", "/messages", "/settings"];
+
+        for (let path of pagesPath) {
+            router.prefetch(path);
+        }
+    }, [router])
     const user: User = {
         id: 1,
         username: "John Doe",
@@ -78,4 +90,4 @@ const layout = ({children}: any) => {
     )
 }
 
-export default layout;
+export default Layout;
