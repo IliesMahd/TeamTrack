@@ -2,10 +2,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import "../../styles/components/navbar.scss";
-import { BiHomeAlt2 } from "react-icons/bi";
-import { BiFolder } from "react-icons/bi"
-import { BiCalendar } from "react-icons/bi";
-import { BiCog } from "react-icons/bi";
+import {AppstoreOutlined, CalendarOutlined, FolderOutlined, MessageOutlined, SettingOutlined} from "@ant-design/icons";
 
 const NavBar = () => {
   const [currentNav, setCurrentNav] = useState("home");
@@ -13,25 +10,27 @@ const NavBar = () => {
     <nav>
       <ul className="pages_link">
         <li>
-          <Link href="dashboard/home" className={`link ${currentNav === "home" ? "active" : ""}`} onClick={() => setCurrentNav("home")}>
-{/*            <FaHouse className="icon" size={24} />*/}
-            <BiHomeAlt2 className="icon" size={24} />
+          <Link href="home" className={`link ${currentNav === "home" ? "active" : ""}`} onClick={() => setCurrentNav("home")}>
+            <AppstoreOutlined className="icon"/>
+            <p>Accueil</p>
           </Link>
         </li>
         <li>
-          <Link href="##" className={`link ${currentNav === "projects" ? "active" : ""}`} onClick={() => setCurrentNav("projects")}>
-{/*            <MdOutlineFolder className="icon" size={24} />*/}
-            <BiFolder className="icon" size={24} />
+          <Link href="projects" className={`link ${currentNav === "projects" ? "active" : ""}`} onClick={() => setCurrentNav("projects")}>
+            <FolderOutlined className="icon"/>
+            <p>Projets</p>
           </Link>
         </li>
         <li>
-          <Link href="##" className={`link ${currentNav === "calender" ? "active" : ""}`} onClick={() => setCurrentNav("calender")}>
-            <BiCalendar className="icon" size={24} />
+          <Link href="messages" className={`link ${currentNav === "messages" ? "active" : ""}`} onClick={() => setCurrentNav("messages")}>
+            <MessageOutlined className="icon"/>
+            <p>Messages</p>
           </Link>
         </li>
         <li>
-            <Link href="##" className={`link ${currentNav === "settings" ? "active" : ""}`} onClick={() => setCurrentNav("settings")}>
-                <BiCog className="icon" size={24} />
+            <Link href="settings" className={`link ${currentNav === "settings" ? "active" : ""}`} onClick={() => setCurrentNav("settings")}>
+              <SettingOutlined className="icon"/>
+                <p>Paramètres</p>
             </Link>
         </li>
       </ul>

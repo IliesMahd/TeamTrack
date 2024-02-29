@@ -1,8 +1,7 @@
 import NextAuth from 'next-auth';
-import { Account, User as AuthUser } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '../../../../models/User';
-import { connect } from '../../../../utils/db';
+import {connect} from '../../../../utils/db';
 import bcrypt from 'bcryptjs';
 
 export const authOptions: any = {
@@ -32,14 +31,16 @@ export const authOptions: any = {
   
               if (isPasswordCorrect) {
                 // Return the user if authentication is successful
-                const { _id, name, email, image } = existingUser;
-                const authUser = {
+      /*          const { _id, email, username, speciality, avatar, projects } = existingUser;
+                return {
                   id: _id.toString(),
-                  name,
                   email,
-                  image,
-                };
-                return authUser;
+                  username,
+                  speciality,
+                  avatar,
+                  projects
+                };*/
+                return existingUser;
               } else {
                 throw new Error('Mot de passe incorrect');
               }

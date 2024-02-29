@@ -17,6 +17,10 @@ const Home = () => {
                 .catch(error => console.error("Erreur lors de la récupération des données"))
         }
     }, [session]);
+
+    return (
+        <h1>Home</h1>
+    )
 }
 export default Home;
 

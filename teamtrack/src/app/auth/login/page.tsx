@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import "../../../styles/auth/form.scss";
 import { signIn, useSession } from "next-auth/react";
 import { motion } from "framer-motion";
-import LoadingScreen from "../../components/LoadingScreen";
 import { BsEnvelope } from "react-icons/bs";
 import { BsLock } from "react-icons/bs";
+import {LockOutlined, MailOutlined} from "@ant-design/icons";
 
 const Login = ({ onRegisterClick }: any) => {
   const router = useRouter();
@@ -58,26 +58,25 @@ const Login = ({ onRegisterClick }: any) => {
   };
 
   return (
-    <>
       <div className="container">
         <motion.h1
-          initial={{ x: -300 }}
-          animate={{ x: 0, speed: 2 }}
+            initial={{x: -300}}
+            animate={{x: 0, speed: 2}}
         >
-            Connexion
+          Connexion
         </motion.h1>
         <motion.form
-          method="POST"
-          onSubmit={handleSubmit}
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+            method="POST"
+            onSubmit={handleSubmit}
+            initial={{x: 300, opacity: 0}}
+            animate={{x: 0, opacity: 1}}
         >
           <div className="wrapper-input">
-            <BsEnvelope className="icon"/>
+            <MailOutlined className="icon" />
             <input type="text" name="email" placeholder="Email"/>
           </div>
           <div className="wrapper-input">
-            <BsLock className="icon"/>
+            <LockOutlined className="icon" />
             <input type="password" name="password" placeholder="Mot de passe"/>
           </div>
           <div className="wrapper-actions">
@@ -108,13 +107,12 @@ const Login = ({ onRegisterClick }: any) => {
                   {errors.password}
                 </motion.p>
             )}
-            <p className="no-account" onClick={onRegisterClick}>
+            <p className="link" onClick={onRegisterClick}>
               Pas encore de compte ? Inscrivez-vous
             </p>
           </div>
         </motion.form>
       </div>
-    </>
   );
 };
 

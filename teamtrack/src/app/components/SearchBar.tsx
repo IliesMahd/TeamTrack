@@ -1,10 +1,10 @@
-import { BsSearch } from "react-icons/bs";
 import "../../styles/components/searchbar.scss";
+import {SearchOutlined} from "@ant-design/icons";
 
 const SearchBar = () => {
     return (
         <div className="search_bar">
-            <BsSearch className="icon"/>
+            <SearchOutlined className="icon"/>
             <input type="text" placeholder="Trouver un projet..."/>
         </div>
     )

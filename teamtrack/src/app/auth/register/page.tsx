@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../../../styles/auth/form.scss";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import {LockOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
 
 const Register = ({ onRegisterClick }: any) => {
   const [errors, setErrors] = useState({
@@ -83,7 +84,81 @@ const Register = ({ onRegisterClick }: any) => {
   };
 
   return (
-    <motion.div
+      <div className="container">
+        <motion.h1
+            initial={{x: -300}}
+            animate={{x: 0, speed: 2}}
+        >Inscription</motion.h1>
+        <motion.form
+          onSubmit={handleSubmit}
+            initial={{x: -300, opacity: 0}}
+            animate={{x: 0, opacity: 1}}
+        >
+          <div className="wrapper-input">
+            <MailOutlined className="icon" />
+            <input type="text" name="email" placeholder="Email"/>
+          </div>
+          <div className="wrapper-input">
+            <UserOutlined className="icon" />
+            <input type="text" name="username" placeholder="Nom d'utilisateur"/>
+          </div>
+          <div className="wrapper-input">
+            <LockOutlined className="icon" />
+            <input type="password" name="password" placeholder="Mot de passe"/>
+          </div>
+          <div className="wrapper-input">
+              <LockOutlined className="icon" />
+              <input type="password" name="confirmPassword" placeholder="Confirmez le mot de passe"/>
+          </div>
+          <div className="wrapper-actions">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <button>S'inscrire</button>
+            {errors.email && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.email}
+                </motion.p>
+            )}
+            {errors.password && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.password}
+                </motion.p>
+            )}
+            {errors.confirmPassword && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.confirmPassword}
+                </motion.p>
+            )}
+            {errors.username && (
+                <motion.p
+                    className="error"
+                    initial={{x: 50}}
+                    animate={{x: 0}}
+                >
+                  {errors.username}
+                </motion.p>
+            )}
+            {successMessage && <p className="success">{successMessage}</p>}
+            <p className="link" onClick={onRegisterClick}>
+              Vous avez déjà un compte ? Connectez-vous
+            </p>
+          </div>
+        </motion.form>
+      </div>
+
+
+    /*<motion.div
       className="container"
       initial={{
         opacity: 0,
@@ -106,7 +181,7 @@ const Register = ({ onRegisterClick }: any) => {
             <input type="text" name="email" />
           </div>
           <div className="wrapper-input">
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            {/!* eslint-disable-next-line react/no-unescaped-entities *!/}
             <label htmlFor="username">Nom d'utilisateur</label>
             <input type="text" name="username" />
           </div>
@@ -119,7 +194,7 @@ const Register = ({ onRegisterClick }: any) => {
             <input type="password" name="confirmPassword" />
           </div>
           <div className="wrapper-actions">
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            {/!* eslint-disable-next-line react/no-unescaped-entities *!/}
             <button>S'inscrire</button>
             {errors.email && (
               <motion.p
@@ -164,7 +239,7 @@ const Register = ({ onRegisterClick }: any) => {
           </div>
         </form>
       </div>
-    </motion.div>
+    </motion.div>*/
   );
 };
 
