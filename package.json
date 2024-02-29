@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@dicebear/collection": "^7.0.5",
+    "@dicebear/core": "^7.0.5"
+  }
+}

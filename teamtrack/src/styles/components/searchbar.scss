@@ -1,0 +1,26 @@
+@import "../variables";
+
+.search_bar {
+  display: flex;
+  border: 1px solid $lines;
+  padding: .5rem 1rem .5rem 1rem;
+  border-radius: $radius;
+  width: min-content;
+
+  .icon {
+    font-size: clamp(1.5rem, 2vw, 3rem);
+    color: $grayText;
+    margin-right: .5rem;
+  }
+
+  input {
+    background: none;
+    font-size: clamp(.8rem, 1vw, 1rem);
+    color: $grayText;
+
+    &::placeholder {
+      color: $grayText;
+      font-size: clamp(.8rem, 1vw, 1rem);
+    }
+  }
+}

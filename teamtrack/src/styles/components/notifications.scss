@@ -1,0 +1,28 @@
+@import "../variables";
+
+.notifications {
+  padding: .5rem 1rem .5rem 1rem;
+  border: 1px solid $lines;
+  border-radius: $radius;
+  position: relative;
+
+  .icon {
+    font-size: clamp(1.5rem, 2vw, 3rem);
+    color: $grayText;
+  }
+
+  .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: red;
+    border-radius: 50%;
+    color: $white;
+    font-size: clamp(.8rem, 1vw, 1rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

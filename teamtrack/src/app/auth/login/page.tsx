@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { useEffect, useState } from "react";
 import "../../../styles/auth/form.scss";
 import { signIn, useSession } from "next-auth/react";
@@ -12,30 +12,9 @@ const Login = ({ onRegisterClick }: any) => {
   const router = useRouter();
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const { data: session } = useSession();
 
   useEffect(() => {
-    router.prefetch("/dashboard");
-    console.log('router', router)
-
-/*    if (router.events) {
-      console.log('router.events', router.events)
-      const handleRouteChange = (url: any, { shallow }: any) => {
-        console.log(
-            `App is changing to ${url} ${
-                shallow ? 'with' : 'without'
-            } shallow routing`
-        );
-      };
-
-      router.events.on('routeChangeStart', handleRouteChange);
-
-      return () => {
-        router.events.off('routeChangeStart', handleRouteChange);
-      };
-    } else {
-        console.log('router.events is not available')
-    }*/
+    router.prefetch("/dashboard/home");
   }, [router]);
 
 
@@ -65,28 +44,19 @@ const Login = ({ onRegisterClick }: any) => {
 
     setErrors({ email: "", password: "" });
 
-    try {
-      const startTime = performance.now();
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
 
-      const res = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      });
-
-      const endTime = performance.now();
-      const elapsedTime = endTime - startTime;
-
-      if (res?.error) {
-        setErrors({ email: res.error, password: "" });
-      } else {
-        router.push("/dashboard");
-      }
-    } catch (error: any) {
-      console.error("An unexpected error happened:", error);
-      setErrors({ ...errors, email: "Une erreur est survenue" });
+    if (result?.error) {
+      setErrors({ email: result.error, password: "" });
+    } else {
+      router.push("/dashboard/home");
     }
   };
+
   return (
     <>
       <div className="container">

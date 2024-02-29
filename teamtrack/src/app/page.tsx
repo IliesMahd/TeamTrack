@@ -7,7 +7,7 @@ import Register from "./auth/register/page";
 import { motion } from "framer-motion";
 import {BsMouse} from "react-icons/bs";
 
-export default function Home() {
+export default function LandingPage() {
   const brandName = "TeamTrack";
   const [showLogin, setShowLogin] = useState(true);
 

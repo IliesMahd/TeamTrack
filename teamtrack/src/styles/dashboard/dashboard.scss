@@ -19,6 +19,7 @@ main {
         display: flex;
         justify-content: center;
         align-items: center;
+        background: $white;
 
         h1 {
             font-size: clamp(1.5rem, 2vw, 2rem);
@@ -31,11 +32,12 @@ main {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background: pink;
+/*        background: pink;*/
+        padding: 1rem;
     }
 
     .main_content {
-        background: $whiteBackground;
+        background: yellowgreen;
     }
 
     .nav {

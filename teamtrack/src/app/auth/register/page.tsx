@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "../../../styles/auth/form.scss";
 import { useRouter } from "next/navigation";
@@ -105,6 +106,7 @@ const Register = ({ onRegisterClick }: any) => {
             <input type="text" name="email" />
           </div>
           <div className="wrapper-input">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             <label htmlFor="username">Nom d'utilisateur</label>
             <input type="text" name="username" />
           </div>
@@ -117,6 +119,7 @@ const Register = ({ onRegisterClick }: any) => {
             <input type="password" name="confirmPassword" />
           </div>
           <div className="wrapper-actions">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             <button>S'inscrire</button>
             {errors.email && (
               <motion.p

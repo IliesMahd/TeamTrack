@@ -2,85 +2,37 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import "../../styles/components/navbar.scss";
-import { MdOutlineDashboard } from "react-icons/md";
-import { MdOutlineFolder } from "react-icons/md";
-import { MdAdd } from "react-icons/md";
-import { MdArrowDropDown } from "react-icons/md";
-import { MdArrowRight } from "react-icons/md";
-import { createAvatar } from "@dicebear/core";
-import { botttsNeutral } from "@dicebear/collection";
-import { BsCalendar4Week } from "react-icons/bs";
-
-
-interface Projects {
-  id: number;
-  name: string;
-  description: string;
-  color: string;
-  team: string[];
-}
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  speciality?: string;
-  projects: Projects[];
-}
+import { BiHomeAlt2 } from "react-icons/bi";
+import { BiFolder } from "react-icons/bi"
+import { BiCalendar } from "react-icons/bi";
+import { BiCog } from "react-icons/bi";
 
 const NavBar = () => {
-  const [currentNav, setCurrentNav] = useState("overview");
-  const [projectIsOpen, setProjectIsOpen] = useState(false);
-  const avatar = useMemo(() => {
-    return createAvatar(botttsNeutral, {
-      size: 48,
-      radius: 50,
-      seed: "Simon",
-      // ... other options
-    }).toDataUriSync();
-  }, []);
-  const user: User = {
-    id: 1,
-    username: "John Doe",
-    email: "test.1@gmail.com",
-    speciality: "Développeur Front-End",
-    projects: [
-      {
-        id: 1,
-        name: "Interface UI/UX - Banque de France",
-        description: "Description du projet 1",
-        color: "#9B5DE5",
-        team: ["John Doe", "Jane Doe"],
-      },
-      {
-        id: 2,
-        name: "Application mobile - Banque de France",
-        description: "Description du projet 2",
-        color: "#F77F00",
-        team: ["John Doe", "Jane Doe"],
-      },
-    ],
-  };
+  const [currentNav, setCurrentNav] = useState("home");
   return (
     <nav>
       <ul className="pages_link">
         <li>
-          <Link href="##" className={`link ${currentNav === "overview" ? "active" : ""}`} onClick={() => setCurrentNav("overview")}>
-            <MdOutlineDashboard className="icon" size={24} />
-            <p>Tableau de bord</p>
+          <Link href="dashboard/home" className={`link ${currentNav === "home" ? "active" : ""}`} onClick={() => setCurrentNav("home")}>
+{/*            <FaHouse className="icon" size={24} />*/}
+            <BiHomeAlt2 className="icon" size={24} />
           </Link>
         </li>
         <li>
           <Link href="##" className={`link ${currentNav === "projects" ? "active" : ""}`} onClick={() => setCurrentNav("projects")}>
-            <MdOutlineFolder className="icon" size={24} />
-            <p>Projets</p>
+{/*            <MdOutlineFolder className="icon" size={24} />*/}
+            <BiFolder className="icon" size={24} />
           </Link>
         </li>
         <li>
-          <Link href="##" className={`link ${currentNav === "calendar" ? "active" : ""}`} onClick={() => setCurrentNav("calendar")}>
-            <BsCalendar4Week className="icon" size={24} />
-            <p>Calendrier</p>
+          <Link href="##" className={`link ${currentNav === "calender" ? "active" : ""}`} onClick={() => setCurrentNav("calender")}>
+            <BiCalendar className="icon" size={24} />
           </Link>
+        </li>
+        <li>
+            <Link href="##" className={`link ${currentNav === "settings" ? "active" : ""}`} onClick={() => setCurrentNav("settings")}>
+                <BiCog className="icon" size={24} />
+            </Link>
         </li>
       </ul>
 {/*      <div className="user-informations">
